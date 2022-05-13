@@ -14,20 +14,20 @@ import {
     Grid,
     GridItem,
     Text,
-    ScaleFade
+    ScaleFade,
 } from '@chakra-ui/react'
+import { DotPulse } from '@uiball/loaders'
 import EngineChoice from './engineChoice'
 
 
 export default function Form() {
     const [prompt, setPrompt] = useState('')
-    // const [result, setResult] = useState('')
     const [results, setResult] = useState([])
-// make receivedMessages be an array of JSONs
-    //let [textareaValue, setTextareaValue] = useState('')
+    const [isLoading, setIsLoading] = useState(false)
 
     const handleSubmit = async (event) => {
         event.preventDefault()
+        setIsLoading(true)
 
         const data = {
             prompt: prompt,
@@ -40,19 +40,27 @@ export default function Form() {
                 'Content-Type': 'application/json',
             },
             body: JSONdata,
-        }
-
-        // const results = JSON.parse(localStorage.getItem('prompt')) || [];
-
-    //FIXME: If response.status = 200 do this, else give back error
+        }        
+        
         const openAIResponse = await fetch(endpoint, options)
         const APIJSON = await openAIResponse.json()
 
         let queryResponseFromAPI = APIJSON.response
+        // setIsLoading(false)
 
-        setResult(allResults => [{prompt: prompt, response: queryResponseFromAPI}, ...allResults])
+        if (openAIResponse.status == 200) {
+            setResult(allResults => [{ prompt: prompt, response: queryResponseFromAPI }, ...allResults])
+            setPrompt("")
+        } else {
+            alert("Oops! We have a " + openAIResponse.status + ' Error: ' + queryResponseFromAPI)
+        }
+        setIsLoading(false)
 
-        setPrompt("")
+
+
+/*         setResult(allResults => [{prompt: prompt, response: queryResponseFromAPI}, ...allResults])
+
+        setPrompt("") */
 
 
     //FIXME: response.status != 200, then do bad stuff with result (json)
@@ -83,7 +91,19 @@ export default function Form() {
                     placeholder="What would you like to ask me?"
                     onChange={event => setPrompt(event.target.value)}
                     required />
-                    <Button id="submitButton" my='5' type="submit" >
+                    <Button 
+                    id="submitButton" 
+                    my='5' 
+                    type="submit" 
+                    bg="tomato"
+                    _hover={{ bg: 'pink' }}
+                    isLoading={isLoading}
+                    spinner={<DotPulse 
+                        size={40}
+                        speed={1.2} 
+                        color="blue" 
+                        />}
+                    >
                         Submit
                     </Button>
                 </FormControl>
