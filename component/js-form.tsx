@@ -46,7 +46,6 @@ export default function Form() {
         const APIJSON = await openAIResponse.json()
 
         let queryResponseFromAPI = APIJSON.response
-        // setIsLoading(false)
 
         if (openAIResponse.status == 200) {
             setResult(allResults => [{ prompt: prompt, response: queryResponseFromAPI }, ...allResults])
@@ -55,28 +54,8 @@ export default function Form() {
             alert("Oops! We have a " + openAIResponse.status + ' Error: ' + queryResponseFromAPI)
         }
         setIsLoading(false)
-
-
-
-/*         setResult(allResults => [{prompt: prompt, response: queryResponseFromAPI}, ...allResults])
-
-        setPrompt("") */
-
-
-    //FIXME: response.status != 200, then do bad stuff with result (json)
-
     }
-    // const [loading, setLoading] = useState(false)
-
-    // function loadData() {
-    //     setLoading({ loading: false })
-
-    //     setTimeout(() => {
-    //         setLoading({ loading: true });
-    //     }, 1000);
-
-    // }
-
+    
     return (
         <Box>
             <EngineChoice />
@@ -85,7 +64,6 @@ export default function Form() {
                     <FormLabel htmlFor="prompt">Enter your prompt:</FormLabel>
                     <Textarea 
                     value={prompt}
-                    // FIXME: Find Chakra UI's specific name : type="text" 
                     id="prompt" 
                     name="prompt"
                     placeholder="What would you like to ask me?"
@@ -98,20 +76,20 @@ export default function Form() {
                     bg="tomato"
                     _hover={{ bg: 'pink' }}
                     isLoading={isLoading}
-                    spinner={<DotPulse 
+                    spinner={
+                        <DotPulse 
                         size={40}
                         speed={1.2} 
                         color="blue" 
                         />}
                     >
-                        Submit
+                    Submit
                     </Button>
                 </FormControl>
             </form>
             <Box id="results">
                 <Heading as='h2' size='md' mb={5}>Results</Heading>
                 <UnorderedList>
-                    {/* <ScaleFade initialScale={0.9} in='true'> */}
                     <Box borderRadius='lg'>{results.map (e =>
                             <Grid
                             templateColumns='repeat(4,1fr)'
@@ -122,7 +100,6 @@ export default function Form() {
                             p={3}
                             overflow='hidden'
                             boxShadow="lg">
-
                                 <GridItem colSpan={1}>
                                     <Text fontWeight ='bold'>Prompt:</Text>
                                 </GridItem>
@@ -141,7 +118,6 @@ export default function Form() {
                             </Grid>
                         )}
                     </Box>
-                    {/* </ScaleFade> */}
                 </UnorderedList>
             </Box>            
         </Box>
