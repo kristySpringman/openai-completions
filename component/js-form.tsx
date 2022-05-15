@@ -15,12 +15,14 @@ import {
     GridItem,
     Text,
     ScaleFade,
+    Select
 } from '@chakra-ui/react'
 import { DotPulse } from '@uiball/loaders'
-import EngineChoice from './engineChoice'
+// import EngineChoice from './engineChoice'
 
 
 export default function Form() {
+    const [engineChoice, setEngineChoice] = useState('text-curie-001')
     const [prompt, setPrompt] = useState('')
     const [results, setResult] = useState([])
     const [isLoading, setIsLoading] = useState(false)
@@ -31,6 +33,7 @@ export default function Form() {
 
         const data = {
             prompt: prompt,
+            value: engineChoice
         }
         const JSONdata = JSON.stringify(data)
         const endpoint = '/api/openai'
@@ -58,7 +61,21 @@ export default function Form() {
     
     return (
         <Box>
-            <EngineChoice />
+            <Box>
+                <Select value={engineChoice} onChange={(e) => { setEngineChoice(e.target.value) }}>
+                    <option value='text-curie-001'>text-curie-001</option>
+                    <option value='text-davinci-002'>text-davinci-002</option>
+                    <option value='text-babbage-001'>text-babbage-001</option>
+                    <option value='text-ada-001'>text-ada-001</option>
+                    <option value='text-davinci-001'>text-davinci-001</option>
+                    <option value='davinci-instruct-beta'>davinci-instruct-beta</option>
+                    <option value='davinci'>davinci</option>
+                    <option value='curie-instruct-beta'>curie-instruct-beta</option>
+                    <option value='curie'>curie</option>
+                    <option value='babbage'>babbage</option>
+                    <option value='ada'>ada</option>
+                </Select>
+            </Box>
             <form onSubmit={handleSubmit}>
                 <FormControl isRequired>
                     <FormLabel htmlFor="prompt">Enter your prompt:</FormLabel>

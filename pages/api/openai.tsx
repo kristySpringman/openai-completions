@@ -1,15 +1,19 @@
 import { Configuration, OpenAIApi } from "openai";
 import { NextApiRequest, NextApiResponse } from 'next'
+import EngineChoice from '../../component/engineChoice'
+
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
-    const {prompt} = req.body
+    const {prompt, value} = req.body
+
     const configuration = new Configuration({
         apiKey: process.env.OPENAI_API_KEY,
     });
     const openai = new OpenAIApi(configuration);
     let openAiResponse
     try {
-        openAiResponse = await openai.createCompletion("text-curie-001", {
+        console.log(value)
+        openAiResponse = await openai.createCompletion(value, {
             prompt: prompt,
             temperature: 0,
             max_tokens: 6,
@@ -27,7 +31,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
     if (openAiResponse.status == 200) {
         res.status(200)
-        res.json({ response: openAiResponse.data.choices[0].text})
+        res.json({ response: openAiResponse.data.choices[0].text })
 
     } else {
         res.status(openAiResponse.status)
