@@ -21,6 +21,7 @@ export default function Form() {
     const [prompt, setPrompt] = useState('')
     const [results, setResult] = useState([])
     const [isLoading, setIsLoading] = useState(false)
+    const [visibility, setIsVisible] = useState('none')
 
     const handleSubmit = async (event) => {
         event.preventDefault()
@@ -46,6 +47,7 @@ export default function Form() {
         let queryResponseFromAPI = APIJSON.response
 
         if (openAIResponse.status == 200) {
+            setIsVisible('block')
             setResult(allResults => [{ value: engineChoice, prompt: prompt, response: queryResponseFromAPI }, ...allResults])
             setPrompt("")
         } else {
@@ -102,7 +104,7 @@ export default function Form() {
                 </FormControl>
             </form>
             <Box id="results">
-                <Heading as='h2' size='md'>Results</Heading>
+                <Heading as='h2' size='md' display={visibility} >Results</Heading>
                     <Box borderRadius='lg'>{results.map (e =>
                             <Grid
                             templateColumns='repeat(4,1fr)'
