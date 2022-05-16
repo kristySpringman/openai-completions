@@ -16,7 +16,7 @@ export default function EngineChoice() {
     
     return(
         <Box>
-            <Select value={value} onChange={(e) => { setValue(e.target.value) }}>
+                <Select value={engineChoice} onChange={(e) => { setEngineChoice(e.target.value) }}>
                     <option value='text-curie-001'>text-curie-001</option>
                     <option value='text-davinci-002'>text-davinci-002</option>
                     <option value='text-babbage-001'>text-babbage-001</option>
@@ -28,8 +28,7 @@ export default function EngineChoice() {
                     <option value='curie'>curie</option>
                     <option value='babbage'>babbage</option>
                     <option value='ada'>ada</option>
-            </Select>
-            <Text>value is {value}</Text>
-        </Box>
+                </Select>
+            </Box>
     )
 }

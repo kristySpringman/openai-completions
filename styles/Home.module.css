@@ -1,14 +1,18 @@
 .container {
-  padding: 0 2rem;
+  padding: 0;
 }
 
 .main {
   min-height: 100vh;
-  padding: 4rem 0;
+  padding: 5rem 0;
   flex: 1;
+  color: white;
+
+  /* background-image: linear-gradient(#1e0160, #3311ee); */
+  background-image: linear-gradient(rgb(74,144,202), #3311ee);
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
 }
 

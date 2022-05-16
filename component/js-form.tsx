@@ -5,20 +5,15 @@ import {
     FormLabel,
     Textarea,
     Button,
-    List,
-    ListItem,
-    ListIcon,
-    OrderedList,
-    UnorderedList,
     Heading,
     Grid,
     GridItem,
     Text,
-    ScaleFade,
-    Select
+    Select,
+    Flex,
+    Spacer
 } from '@chakra-ui/react'
 import { DotPulse } from '@uiball/loaders'
-// import EngineChoice from './engineChoice'
 
 
 export default function Form() {
@@ -51,7 +46,7 @@ export default function Form() {
         let queryResponseFromAPI = APIJSON.response
 
         if (openAIResponse.status == 200) {
-            setResult(allResults => [{ prompt: prompt, response: queryResponseFromAPI }, ...allResults])
+            setResult(allResults => [{ value: engineChoice, prompt: prompt, response: queryResponseFromAPI }, ...allResults])
             setPrompt("")
         } else {
             alert("Oops! We have a " + openAIResponse.status + ' Error: ' + queryResponseFromAPI)
@@ -62,18 +57,13 @@ export default function Form() {
     return (
         <Box>
             <Box>
-                <Select value={engineChoice} onChange={(e) => { setEngineChoice(e.target.value) }}>
+                <Text>Select your OpenAI engine</Text>
+                <Select bg="white" color='black' value={engineChoice} onChange={(e) => { setEngineChoice(e.target.value) }}>
                     <option value='text-curie-001'>text-curie-001</option>
                     <option value='text-davinci-002'>text-davinci-002</option>
                     <option value='text-babbage-001'>text-babbage-001</option>
                     <option value='text-ada-001'>text-ada-001</option>
                     <option value='text-davinci-001'>text-davinci-001</option>
-                    <option value='davinci-instruct-beta'>davinci-instruct-beta</option>
-                    <option value='davinci'>davinci</option>
-                    <option value='curie-instruct-beta'>curie-instruct-beta</option>
-                    <option value='curie'>curie</option>
-                    <option value='babbage'>babbage</option>
-                    <option value='ada'>ada</option>
                 </Select>
             </Box>
             <form onSubmit={handleSubmit}>
@@ -85,42 +75,55 @@ export default function Form() {
                     name="prompt"
                     placeholder="What would you like to ask me?"
                     onChange={event => setPrompt(event.target.value)}
+                    bg="white"
+                    color='black'
                     required />
-                    <Button 
-                    id="submitButton" 
-                    my='5' 
-                    type="submit" 
-                    bg="tomato"
-                    _hover={{ bg: 'pink' }}
-                    isLoading={isLoading}
-                    spinner={
+
+                    <Flex>
+                        <Spacer />
+                        <Button 
+                        id="submitButton" 
+                        my='5' 
+                        type="submit" 
+                        bg="#5e59fd"
+                        sx={{ _disabled: { opacity: 1 } }}
+                        _hover={{ bg: '#5f59fd8b' }}
+                        isLoading={isLoading}
+                        spinner={
                         <DotPulse 
                         size={40}
                         speed={1.2} 
-                        color="blue" 
+                        color="#3211eea7" 
                         />}
-                    >
-                    Submit
-                    </Button>
+                        >
+                        Submit
+                        </Button>
+                    </Flex>
                 </FormControl>
             </form>
             <Box id="results">
-                <Heading as='h2' size='md' mb={5}>Results</Heading>
-                <UnorderedList>
+                <Heading as='h2' size='md'>Results</Heading>
                     <Box borderRadius='lg'>{results.map (e =>
                             <Grid
                             templateColumns='repeat(4,1fr)'
                             gap={2}
-                            mb={5}
-                            bg="lavender"
+                            my={5}
+                            bg="#ffffff39"
                             borderRadius='lg'
                             p={3}
                             overflow='hidden'
-                            boxShadow="lg">
+                            boxShadow="lg"
+                            align-items='center'>
+                                <GridItem colSpan={1}>
+                                    <Text fontWeight='bold'>Engine Used:</Text>
+                                </GridItem>
+                                <GridItem colSpan={3} sx={{ whiteSpace: "pre-wrap" }}>
+                                    <Text>{e.value}</Text>
+                                </GridItem>
+                                
                                 <GridItem colSpan={1}>
                                     <Text fontWeight ='bold'>Prompt:</Text>
                                 </GridItem>
-
                                 <GridItem colSpan={3} sx={{ whiteSpace: "pre-wrap" }}>
                                     <Text>{e.prompt}</Text>
                                 </GridItem>
@@ -129,13 +132,12 @@ export default function Form() {
                                     <Text fontWeight='bold'>Response:</Text>
                                 </GridItem>
 
-                                <GridItem colSpan={3}>
+                            <GridItem colSpan={3}>
                                     <Text>{e.response}</Text>
                                 </GridItem>
                             </Grid>
                         )}
                     </Box>
-                </UnorderedList>
             </Box>            
         </Box>
         

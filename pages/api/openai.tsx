@@ -16,7 +16,7 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
         openAiResponse = await openai.createCompletion(value, {
             prompt: prompt,
             temperature: 0,
-            max_tokens: 6,
+            max_tokens: 150,
         });
     } catch (error) {
         res.status(500)
