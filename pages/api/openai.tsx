@@ -1,7 +1,5 @@
 import { Configuration, OpenAIApi } from "openai";
 import { NextApiRequest, NextApiResponse } from 'next'
-import EngineChoice from '../../component/engineChoice'
-
 
 export default async (req: NextApiRequest, res: NextApiResponse) => {
     const {prompt, value} = req.body
