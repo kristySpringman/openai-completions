@@ -59,18 +59,20 @@ export default function Form() {
     return (
         <Box>
             <Box>
-                <Text>Select your OpenAI engine</Text>
-                <Select bg="white" color='black' value={engineChoice} onChange={(e) => { setEngineChoice(e.target.value) }}>
+                <FormControl>
+                    <FormLabel pt="8px" htmlFor='engineSelection'>Select your OpenAI engine:</FormLabel>
+                <Select id='engineSelection' bg="white" color='black' value={engineChoice} onChange={(e) => { setEngineChoice(e.target.value) }}>
                     <option value='text-curie-001'>text-curie-001</option>
                     <option value='text-davinci-002'>text-davinci-002</option>
                     <option value='text-babbage-001'>text-babbage-001</option>
                     <option value='text-ada-001'>text-ada-001</option>
                     <option value='text-davinci-001'>text-davinci-001</option>
                 </Select>
+                </FormControl>
             </Box>
             <form onSubmit={handleSubmit}>
                 <FormControl isRequired>
-                    <FormLabel htmlFor="prompt">Enter your prompt:</FormLabel>
+                    <FormLabel pt="8px" htmlFor="prompt">Enter your prompt:</FormLabel>
                     <Textarea 
                     value={prompt}
                     id="prompt" 
@@ -117,7 +119,7 @@ export default function Form() {
                             boxShadow="lg"
                             align-items='center'>
                                 <GridItem colSpan={1}>
-                                    <Text fontWeight='bold'>Engine Used:</Text>
+                                    <Text fontWeight='bold'>Engine:</Text>
                                 </GridItem>
                                 <GridItem colSpan={3} sx={{ whiteSpace: "pre-wrap" }}>
                                     <Text>{e.value}</Text>
