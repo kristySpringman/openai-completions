@@ -61,13 +61,14 @@ export default function Form() {
             <Box>
                 <FormControl>
                     <FormLabel pt="8px" htmlFor='engineSelection'>Select your OpenAI engine:</FormLabel>
-                <Select id='engineSelection' bg="white" color='black' value={engineChoice} onChange={(e) => { setEngineChoice(e.target.value) }}>
-                    <option value='text-curie-001'>text-curie-001</option>
-                    <option value='text-davinci-002'>text-davinci-002</option>
-                    <option value='text-babbage-001'>text-babbage-001</option>
-                    <option value='text-ada-001'>text-ada-001</option>
-                    <option value='text-davinci-001'>text-davinci-001</option>
-                </Select>
+                    <Select id='engineSelection' bg="white" color='black' value={engineChoice} onChange={(e) => { setEngineChoice(e.target.value) }}>
+                        <option value='text-curie-001'>text-curie-001</option>
+                        <option value='text-davinci-002'>text-davinci-002</option>
+                        <option value='text-davinci-001'>text-davinci-001</option>
+                        <option value='text-babbage-001'>text-babbage-001</option>
+                        <option value='text-ada-001'>text-ada-001</option>
+                        
+                    </Select>
                 </FormControl>
             </Box>
             <form onSubmit={handleSubmit}>

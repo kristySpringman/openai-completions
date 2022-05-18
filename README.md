@@ -1,34 +1,25 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+#  OpenAI Completions Project
+OpenAI is the creator of multiple AI models, each specializing in specific purposes. This project allows users to select which OpenAI Engine they wish to use and type in a prompt for the AI to answer. The data of the prompt is sent to OpenAI's API to retrieve and display the result back to the user. 
 
-First, run the development server:
+Some examples of prompts a user can send to OpenAI include:
+* "Write me a poem about cats wearing pajamas in the snow" 
+* "Create an outline for an essay about Nikola Tesla and his contributions to technology" 
 
-```bash
-npm run dev
-# or
-yarn dev
-```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+More information about OpenAI can be found at [OpenAI's Home Page](https://openai.com)
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+## Tech used:
+* HTML５
+* CSS３
+* TypeScript
+* Next.js
+* Chakra UI
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+# Features
+- The user has the choice of which AI Engine to use through a selection box
+- When a prompt is submited on the web page, a result containing data of what engine was used, what the user's prompt was, and the response of the AI are displayed as one listing
+- Web accessibility is enabled

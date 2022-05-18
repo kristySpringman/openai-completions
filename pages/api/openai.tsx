@@ -10,10 +10,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     const openai = new OpenAIApi(configuration);
     let openAiResponse
     try {
-        console.log(value)
         openAiResponse = await openai.createCompletion(value, {
             prompt: prompt,
-            temperature: 0,
+            temperature: 0.3,
             max_tokens: 150,
         });
     } catch (error) {
