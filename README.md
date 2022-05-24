@@ -1,4 +1,6 @@
 
+![OpenAI Completions Project Image](/public/ProjectEx.png)
+
 #  OpenAI Completions Project
 OpenAI is the creator of multiple AI models, each specializing in specific purposes. This project allows users to select which OpenAI Engine they wish to use and type in a prompt for the AI to answer. The data of the prompt is sent to OpenAI's API to retrieve and display the result back to the user. 
 
